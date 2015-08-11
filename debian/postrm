@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+set -e
+
+if [ "$1" = "purge" ]; then
+    update-alternatives --remove x-www-browser /opt/firefox/firefox
+    update-alternatives --remove gnome-www-browser /opt/firefox/firefox
+fi
+
+#DEBHELPER#
