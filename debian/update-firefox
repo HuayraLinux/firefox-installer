@@ -24,9 +24,7 @@ if [ $? = 0 ]; then
     mv "$work_dir/firefox" /opt    
     rm -rf "$work_dir"
     echo "Instalacion finalizada"
-    
 else
     echo "md5sum ERROR"
+    echo "El directorio temporal de trabajo no fue eliminado para qe puedas revisar el problema: $work_dir"
 fi
-
-# rm -rf $work_dir

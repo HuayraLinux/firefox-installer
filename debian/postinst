@@ -1,0 +1,16 @@
+#! /bin/sh
+set -e
+
+# The following only on a new install
+if [ "$1" = "configure" ]; then
+
+  firefox-installer
+  # The following only on a new install
+  if [ "$2" = "" ]; then
+    echo "Instalando Firefox por primera vez"
+  fi
+
+fi
+
+exit 0
+#DEBHELPER#
