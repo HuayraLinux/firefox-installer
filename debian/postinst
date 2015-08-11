@@ -4,7 +4,7 @@ set -e
 # The following only on a new install
 if [ "$1" = "configure" ]; then
 
-  firefox-installer
+  update-firefox
   # The following only on a new install
   if [ "$2" = "" ]; then
     echo "Instalando Firefox por primera vez"
