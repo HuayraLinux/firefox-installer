@@ -1,3 +1,9 @@
+firefox-installer (1.1) unstable; urgency=medium
+
+  * correcciones de lintian
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Tue, 11 Aug 2015 14:54:40 -0300
+
 firefox-installer (1.0) unstable; urgency=medium
 
   * Initial release.
