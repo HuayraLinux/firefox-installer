@@ -1,3 +1,9 @@
+firefox-installer (1.2) unstable; urgency=medium
+
+  * mejor tolerancia a fallos de conexion 
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Tue, 11 Aug 2015 15:24:59 -0300
+
 firefox-installer (1.1) unstable; urgency=medium
 
   * correcciones de lintian
