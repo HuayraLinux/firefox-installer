@@ -26,5 +26,5 @@ if [ $? = 0 ]; then
     echo "Instalacion finalizada"
 else
     echo "md5sum ERROR"
-    echo "El directorio temporal de trabajo no fue eliminado para qe puedas revisar el problema: $work_dir"
+    echo "El directorio temporal de trabajo no fue eliminado para que puedas revisar el problema: $work_dir"
 fi
