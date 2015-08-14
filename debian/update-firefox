@@ -10,7 +10,7 @@ if [ $? = 0 ];then
 	moz_lang=`echo $LANG | cut -f 1 -d . | sed s/_/-/`
 
 	# Si ejecutamos en un chroot problamente el idioma no este seleccionado
-	if [ "$moz_lang" = "C" ];then
+	if [ "$moz_lang" = "C" ] || [ -z "$moz_lang" ];then
 		echo "Forzando lenguaje es-AR"
 		moz_lang="es-AR"
 	fi
