@@ -1,3 +1,9 @@
+firefox-installer (1.3) unstable; urgency=medium
+
+  * si el locale = "" tambien forzar al español (es-AR)
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Fri, 14 Aug 2015 11:11:12 -0300
+
 firefox-installer (1.2) unstable; urgency=medium
 
   * mejor tolerancia a fallos de conexion 
