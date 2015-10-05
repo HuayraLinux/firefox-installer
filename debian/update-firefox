@@ -1,6 +1,8 @@
 #!/bin/bash
 
 failed=0
+local_version=0
+
 work_dir=`mktemp -d --suffix=.update-firefox`
 moz_url='http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/latest'
 echo "Descargando archivo de versiones"
@@ -20,30 +22,48 @@ if [ $? = 0 ];then
 	moz_md5=`echo $moz_link | cut -f 1 -d " "`
 	moz_path=`echo $moz_link | cut -f 2 -d " "`
 	moz_file=`basename $moz_path`
+	moz_latest=`echo $moz_file | sed -e 's/firefox-//' -e 's/.tar.bz2//'`
+    echo "La versión mas reciente de Firefox es $moz_latest"
 
 	echo "$moz_md5 $work_dir/$moz_file" >> "$work_dir/VERIFY.MD5"
-	echo "Descargando $moz_file...Aguarde un momento..."
-	wget -q --show-progress -O "$work_dir/$moz_file" "$moz_url/$moz_path" 
+	
+	echo "Comprobando la versión instalada"
+	if [ -f /opt/firefox/application.ini ]; then
+		local_version=`grep  -e "^Version" /opt/firefox/application.ini | cut -d '=' -f 2`
+		echo "Versión instalada: $local_version" 
+	else
+		echo "Firefox no se encuentra instalado actualmente"
+	fi
+	
+	dpkg --compare-versions $local_version ge $moz_latest
 	if [ $? = 0 ]; then
-
-		#Archivo descargado, comprobar md5
-		echo "Verificando MD5"
-		md5sum -c "$work_dir/VERIFY.MD5"
-
+		echo "Firefox está actualizado"
+	else
+		echo "Descargando $moz_file...Aguarde un momento..."
+		wget -q --show-progress -O "$work_dir/$moz_file" "$moz_url/$moz_path" 
 		if [ $? = 0 ]; then
-			echo "md5sum OK"
-			echo "Eliminado version anterior"
-			rm -rf /opt/firefox
-			echo "Descomprimiendo $moz_file...Aguarde un momento mas..."
-			tar xjf "$work_dir/$moz_file" -C "$work_dir"
-			mv "$work_dir/firefox" /opt    
+
+			#Archivo descargado, comprobar md5
+			echo "Verificando MD5"
+			md5sum -c "$work_dir/VERIFY.MD5"
+
+			if [ $? = 0 ]; then
+				echo "md5sum OK"
+				echo "Eliminado versión anterior"
+				rm -rf /opt/firefox
+				echo "Descomprimiendo $moz_file...Aguarde un momento mas..."
+				tar xjf "$work_dir/$moz_file" -C "$work_dir"
+				mv "$work_dir/firefox" /opt    
+				echo "Firefox ha sido actualizado."
+				echo "Se recomienda cerrar la aplicación y volverla a ejecutar"
+			else
+				echo "md5sum ERROR"
+				failed=1
+			fi
 		else
-			echo "md5sum ERROR"
+			echo "No se puede descargar el archivo $moz_file."
 			failed=1
 		fi
-	else
-		echo "No se puede descargar el archivo $moz_file."
-		failed=1
 	fi
 
 else

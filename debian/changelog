@@ -1,3 +1,9 @@
+firefox-installer (1.5) unstable; urgency=medium
+
+  * Mejora del script de actualización
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Mon, 05 Oct 2015 11:16:36 -0300
+
 firefox-installer (1.4) unstable; urgency=medium
 
   * version de dependencia de wget

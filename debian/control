@@ -14,4 +14,10 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  coreutils (>= 8.23), wget (>= 1.16), sed (>= 4.2)
 Description: Pequeño script para instalar la última versión de Firefox
  Este script instala la versión más reciente de Mozilla Firefox
+ . 
+ Mozilla Firefox (llamado simplemente Firefox) es un navegador web libre y de 
+ código abierto desarrollado para Microsoft Windows, Android, OS X y GNU/Linux 
+ coordinado por la Corporación Mozilla y la Fundación Mozilla. Usa el motor 
+ Gecko para renderizar páginas webs, el cual implementa actuales y futuros 
+ estándares web.
 
