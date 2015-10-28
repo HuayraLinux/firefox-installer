@@ -1,3 +1,9 @@
+firefox-installer (1.6) unstable; urgency=medium
+
+  * bump version!
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Wed, 28 Oct 2015 09:45:49 -0300
+
 firefox-installer (1.5) unstable; urgency=medium
 
   * Mejora del script de actualización
