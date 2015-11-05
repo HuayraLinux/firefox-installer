@@ -1,6 +1,7 @@
-firefox-installer (1.7) UNRELEASED; urgency=medium
+firefox-installer (1.7) unstable; urgency=medium
 
   * fix warings de lintian
+  * solo se instalan los alternatives si existe /opt/firefox/firefox
 
  -- Fernando Toledo <ragnarok@docksud.com.ar>  Wed, 28 Oct 2015 10:25:13 -0300
 
