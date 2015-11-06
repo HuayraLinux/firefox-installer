@@ -72,7 +72,7 @@ else
 fi
 
 if [ $failed = 0 ]; then
-#    rm -rf "$work_dir"
+    rm -rf "$work_dir"
     echo "Instalación finalizada"
 else
     echo "El directorio temporal de trabajo no fue eliminado para que puedas revisar el problema: $work_dir"
