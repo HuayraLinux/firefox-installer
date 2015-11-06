@@ -6,7 +6,7 @@ local_version=0
 work_dir=`mktemp -d --suffix=.update-firefox`
 moz_url='http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/latest'
 echo "Descargando archivo de versiones"
-wget -q --show-progress -O "$work_dir/MD5SUMS" "$moz_url/MD5SUMS"
+wget -q --show-progress -O "$work_dir/SHA512SUMS" "$moz_url/SHA512SUMS"
 
 if [ $? = 0 ];then
 	moz_lang=`echo $LANG | cut -f 1 -d . | sed s/_/-/`
@@ -17,7 +17,7 @@ if [ $? = 0 ];then
 		moz_lang="es-AR"
 	fi
 	moz_arch=`uname -m`
-	moz_link=`grep linux-$moz_arch/$moz_lang $work_dir/MD5SUMS |grep bz2`
+	moz_link=`grep linux-$moz_arch/$moz_lang $work_dir/SHA512SUMS |grep bz2`
 
 	moz_md5=`echo $moz_link | cut -f 1 -d " "`
 	moz_path=`echo $moz_link | cut -f 2 -d " "`
@@ -25,7 +25,7 @@ if [ $? = 0 ];then
 	moz_latest=`echo $moz_file | sed -e 's/firefox-//' -e 's/.tar.bz2//'`
     echo "La versión mas reciente de Firefox es $moz_latest"
 
-	echo "$moz_md5 $work_dir/$moz_file" >> "$work_dir/VERIFY.MD5"
+	echo "$moz_md5 $work_dir/$moz_file" >> "$work_dir/VERIFY.SHA512"
 	
 	echo "Comprobando la versión instalada"
 	if [ -f /opt/firefox/application.ini ]; then
@@ -43,12 +43,12 @@ if [ $? = 0 ];then
 		wget -q --show-progress -O "$work_dir/$moz_file" "$moz_url/$moz_path" 
 		if [ $? = 0 ]; then
 
-			#Archivo descargado, comprobar md5
-			echo "Verificando MD5"
-			md5sum -c "$work_dir/VERIFY.MD5"
+			#Archivo descargado, comprobar sha512
+			echo "Verificando SHA512"
+			sha512sum -c "$work_dir/VERIFY.SHA512"
 
 			if [ $? = 0 ]; then
-				echo "md5sum OK"
+				echo "sha512sum OK"
 				echo "Eliminado versión anterior"
 				rm -rf /opt/firefox
 				echo "Descomprimiendo $moz_file...Aguarde un momento mas..."
@@ -57,7 +57,7 @@ if [ $? = 0 ];then
 				echo "Firefox ha sido actualizado."
 				echo "Se recomienda cerrar la aplicación y volverla a ejecutar"
 			else
-				echo "md5sum ERROR"
+				echo "sha512 ERROR - Posible error en la descarga?"
 				failed=1
 			fi
 		else
@@ -72,7 +72,7 @@ else
 fi
 
 if [ $failed = 0 ]; then
-    rm -rf "$work_dir"
+#    rm -rf "$work_dir"
     echo "Instalación finalizada"
 else
     echo "El directorio temporal de trabajo no fue eliminado para que puedas revisar el problema: $work_dir"
