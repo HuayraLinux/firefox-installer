@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Mozilla Firefox
 Comment=Navagador Web Mozilla Firefox
-Exec=firefox %u
+Exec=/opt/firefox/firefox %u
 Icon=firefox
 Categories=WebBrowser;Network
 Version=1.0

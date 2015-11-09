@@ -1,3 +1,9 @@
+firefox-installer (1.9) unstable; urgency=medium
+
+  * fix del .desktop para tomar a firefox como predeterminado
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Mon, 09 Nov 2015 15:33:07 -0300
+
 firefox-installer (1.8) unstable; urgency=medium
 
   * Cambio en el sitio de firefox md5 => sha512
