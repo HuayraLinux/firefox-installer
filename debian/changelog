@@ -1,3 +1,11 @@
+firefox-installer (1.10) unstable; urgency=medium
+
+  * Deshabilitando la comprobacion automatica de actualizaciones de firefox 
+    (hasta poder cambiar el mensaje del popup) para mantenerla desde el 
+    paquete
+    
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Tue, 10 Nov 2015 00:11:27 -0300
+
 firefox-installer (1.9) unstable; urgency=medium
 
   * fix del .desktop para tomar a firefox como predeterminado
