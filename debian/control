@@ -11,7 +11,7 @@ Vcs-Browser: https://github.com/HuayraLinux/firefox-installer
 Package: firefox-installer
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, 
- coreutils (>= 8.23), wget (>= 1.16), sed (>= 4.2)
+ coreutils (>= 8.23), wget (>= 1.16), sed (>= 4.2), bzip2 (>= 1.0.6)
 Description: Pequeño script para instalar la última versión de Firefox
  Este script instala la versión más reciente de Mozilla Firefox
  .
