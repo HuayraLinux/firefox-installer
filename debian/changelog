@@ -1,8 +1,22 @@
-firefox-installer (1.10) unstable; urgency=medium
+firefox-installer (1.12) unstable; urgency=medium
 
   * refactor del script por cambios en el server de mozilla (nuevamente)
 
  -- Fernando Toledo <ragnarok@docksud.com.ar>  Thu, 19 Nov 2015 15:13:31 -0300
+
+firefox-installer (1.11) unstable; urgency=medium
+
+  * dependencia de bzip2
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Mon, 16 Nov 2015 15:12:15 -0300
+
+firefox-installer (1.10) unstable; urgency=medium
+
+  * Deshabilitando la comprobacion automatica de actualizaciones de firefox 
+    (hasta poder cambiar el mensaje del popup) para mantenerla desde el 
+    paquete
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Tue, 10 Nov 2015 00:11:27 -0300
 
 firefox-installer (1.9) unstable; urgency=medium
 

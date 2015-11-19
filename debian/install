@@ -1,3 +1,5 @@
 debian/update-firefox usr/sbin/
 debian/firefox.desktop usr/share/applications/
 debian/firefox.svg usr/share/icons/hicolor/scalable/apps/
+debian/huayra.js etc/huayra/firefox/
+debian/huayra.cfg etc/huayra/firefox/
