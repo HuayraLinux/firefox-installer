@@ -2,82 +2,105 @@
 
 failed=0
 local_version=0
+check_sha512=1
 
 work_dir=`mktemp -d --suffix=.update-firefox`
-moz_url='http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/latest'
-echo "Descargando archivo de versiones"
-wget -q --show-progress -O "$work_dir/SHA512SUMS" "$moz_url/SHA512SUMS"
 
-if [ $? = 0 ];then
-	moz_lang=`echo $LANG | cut -f 1 -d . | sed s/_/-/`
+arch=`dpkg --print-architecture`
 
-	# Si ejecutamos en un chroot problamente el idioma no este seleccionado
-	if [ "$moz_lang" = "C" ] || [ -z "$moz_lang" ];then
-		echo "Forzando lenguaje es-AR"
-		moz_lang="es-AR"
-	fi
-	moz_arch=`uname -m`
-	moz_link=`grep linux-$moz_arch/$moz_lang $work_dir/SHA512SUMS |grep bz2`
-
-	moz_md5=`echo $moz_link | cut -f 1 -d " "`
-	moz_path=`echo $moz_link | cut -f 2 -d " "`
-	moz_file=`basename $moz_path`
-	moz_latest=`echo $moz_file | sed -e 's/firefox-//' -e 's/.tar.bz2//'`
-    echo "La versión mas reciente de Firefox es $moz_latest"
-
-	echo "$moz_md5 $work_dir/$moz_file" >> "$work_dir/VERIFY.SHA512"
-	
-	echo "Comprobando la versión instalada"
-	if [ -f /opt/firefox/application.ini ]; then
-		local_version=`grep  -e "^Version" /opt/firefox/application.ini | cut -d '=' -f 2`
-		echo "Versión instalada: $local_version" 
-	else
-		echo "Firefox no se encuentra instalado actualmente"
-	fi
-	
-	dpkg --compare-versions $local_version ge $moz_latest
-	if [ $? = 0 ]; then
-		echo "Firefox está actualizado"
-	else
-		echo "Descargando $moz_file...Aguarde un momento..."
-		wget -q --show-progress -O "$work_dir/$moz_file" "$moz_url/$moz_path" 
-		if [ $? = 0 ]; then
-
-			#Archivo descargado, comprobar sha512
-			echo "Verificando SHA512"
-			sha512sum -c "$work_dir/VERIFY.SHA512"
-
-			if [ $? = 0 ]; then
-				echo "sha512sum OK"
-				echo "Eliminado versión anterior"
-				rm -rf /opt/firefox
-				echo "Descomprimiendo $moz_file...Aguarde un momento mas..."
-				tar xjf "$work_dir/$moz_file" -C "$work_dir"
-				mv "$work_dir/firefox" /opt    
-				echo "Firefox ha sido actualizado."
-				echo "Se recomienda cerrar la aplicación y volverla a ejecutar"
-			else
-				echo "sha512 ERROR - Posible error en la descarga?"
-				failed=1
-			fi
-		else
-			echo "No se puede descargar el archivo $moz_file."
-			failed=1
-		fi
-	fi
-
+if [ "$arch" = "amd64" ]; then
+	#parametro para la descarga
+	moz_os="linux64"
+	#parametro para el url del sha512
+	moz_arch="x86_64"
+elif [ "$arch" = "i386" ]; then
+	moz_os="linux"
+	moz_arch="i686"
 else
-	echo "Error al descargar archivo de versiones. Esta conectado a internet?"
+	echo "Arquitectura no soportada por este script :("
 	failed=1
 fi
 
-if [ $failed = 0 ]; then
-    rm -rf "$work_dir"
-    echo "Restableciendo preferencias por defecto"
-    cp -f /etc/huayra/firefox/huayra.js /opt/firefox/defaults/pref/
-    cp -f /etc/huayra/firefox/huayra.cfg /opt/firefox/
-    echo "Instalación finalizada"
-else
-    echo "El directorio temporal de trabajo no fue eliminado para que puedas revisar el problema: $work_dir"
-fi
+if [ $failed = 0 ]; then 
+	moz_lang=`echo $LANG | cut -f 1 -d . | sed s/_/-/`
+	# Si ejecutamos en un chroot problamente el idioma no este seleccionado
+	if [ "$moz_lang" = "C" ] || [ -z "$moz_lang" ]; then
+		echo "Forzando lenguaje es-AR"
+		moz_lang="es-AR"
+	fi
+	#descargamos el header 
+	moz_url="https://download.mozilla.org/?product=firefox-latest&os=$moz_os&lang=$moz_lang"
+	echo "Descargando $moz_url"
+	curl -sI "$moz_url" > "$work_dir/header.txt"
+	
+	if [ $? = 0 ]; then 
+		# por algun motivo el header que viene desde el webserver tiene fin de linea no unix. convertimos
+		dos2unix "$work_dir/header.txt"
+	
+		moz_link=`cat "$work_dir/header.txt" | grep Location |sed 's/Location: //'`
+		moz_file=`basename $moz_link`
+		moz_latest=`echo $moz_file | sed -e 's/firefox-//' -e 's/.tar.bz2//'`
+		echo "La versión mas reciente de Firefox es $moz_latest"
+		echo "Comprobando la versión instalada"
+		if [ -f /opt/firefox/application.ini ]; then
+			local_version=`grep  -e "^Version" /opt/firefox/application.ini | cut -d '=' -f 2`
+			echo "Versión instalada: $local_version" 
+		else
+			echo "Firefox no se encuentra instalado actualmente"
+		fi
+			
+		dpkg --compare-versions $local_version ge $moz_latest
+		if [ $? = 0 ]; then
+			echo "Firefox está actualizado"
+		else
+			echo "Descargando $moz_file...Aguarde un momento..."
+			curl -o "$work_dir/$moz_file" "$moz_link"
+			
+			if [ $? = 0 ]; then
 
+				curl -o "$work_dir/VERIFY.SHA512" "http://ftp.mozilla.org/pub/firefox/releases/$moz_latest/SHA512SUMS"
+				if [ $? = 0 ]; then  
+					grep " linux-$moz_arch/$moz_lang/firefox-" "$work_dir/VERIFY.SHA512" |sed "s/linux-$moz_arch\/$moz_lang\///" > "$work_dir/VERIFY.SHA512.sum"
+
+					#Archivo descargado, comprobar sha512
+					echo "Verificando SHA512"
+					old_pwd=`pwd` 
+					cd "$work_dir"
+					sha512sum -c "VERIFY.SHA512.sum"
+				
+					if [ $? = 0 ]; then
+						echo "sha512sum OK"
+						echo "Eliminado versión anterior"
+						rm -rf /opt/firefox
+						echo "Descomprimiendo $moz_file...Aguarde un momento mas..."
+						tar xjf "$work_dir/$moz_file" -C "$work_dir"
+						mv "$work_dir/firefox" /opt    
+						echo "Firefox ha sido actualizado."
+						echo "Se recomienda cerrar la aplicación y volverla a ejecutar"
+					else
+						echo "sha512 ERROR - Posible error en la descarga?"
+						failed=1
+					fi
+					cd $old_pwd
+				else
+					echo "No fue posible descargar el archivo sha512"
+					failed=1
+				fi
+			else
+				echo "No se puede descargar el archivo $moz_file."
+				failed=1
+			fi
+		fi
+	else
+		echo "Error al descargar encabezados"
+		failed=1
+	fi
+	
+	if [ $failed = 0 ]; then
+		rm -rf "$work_dir"
+		echo "Instalación finalizada"
+	else
+		echo "El directorio temporal de trabajo no fue eliminado para que puedas revisar el problema: $work_dir"
+	fi
+fi 
+exit 0

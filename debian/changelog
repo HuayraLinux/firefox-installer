@@ -1,6 +1,7 @@
 firefox-installer (1.12) unstable; urgency=medium
 
   * refactor del script por cambios en el server de mozilla (nuevamente)
+  * dependencia de dos2unix y cambio de wget a curl
 
  -- Fernando Toledo <ragnarok@docksud.com.ar>  Thu, 19 Nov 2015 15:13:31 -0300
 
