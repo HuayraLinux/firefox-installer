@@ -1,3 +1,9 @@
+firefox-installer (1.13) unstable; urgency=medium
+
+  * provides www-browser
+
+ -- Fernando Toledo <ftoledo@ftoledo-huayra>  Wed, 23 Dec 2015 14:45:36 -0300
+
 firefox-installer (1.12) unstable; urgency=medium
 
   * refactor del script por cambios en el server de mozilla (nuevamente)
