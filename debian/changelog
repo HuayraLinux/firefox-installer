@@ -1,3 +1,9 @@
+firefox-installer (1.14) unstable; urgency=medium
+
+  * Corrección de instalación de las preferencias por defecto 
+
+ -- Fernando Toledo <ftoledo@ftoledo-huayra>  Mon, 28 Dec 2015 12:37:14 -0300
+
 firefox-installer (1.13) unstable; urgency=medium
 
   * provides www-browser
