@@ -1,14 +1,20 @@
+firefox-installer (1.15) unstable; urgency=medium
+
+  * soporte de distribution.ini
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Tue, 22 Mar 2016 15:08:42 -0300
+
 firefox-installer (1.14) unstable; urgency=medium
 
   * Corrección de instalación de las preferencias por defecto 
 
- -- Fernando Toledo <ftoledo@ftoledo-huayra>  Mon, 28 Dec 2015 12:37:14 -0300
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Mon, 28 Dec 2015 12:37:14 -0300
 
 firefox-installer (1.13) unstable; urgency=medium
 
   * provides www-browser
 
- -- Fernando Toledo <ftoledo@ftoledo-huayra>  Wed, 23 Dec 2015 14:45:36 -0300
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Wed, 23 Dec 2015 14:45:36 -0300
 
 firefox-installer (1.12) unstable; urgency=medium
 

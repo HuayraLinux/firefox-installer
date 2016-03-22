@@ -101,6 +101,8 @@ if [ $failed = 0 ]; then
 		echo "Restableciendo preferencias por defecto"
 		cp -f /etc/huayra/firefox/huayra.js /opt/firefox/defaults/pref/
 		cp -f /etc/huayra/firefox/huayra.cfg /opt/firefox/
+		mkdir -p /opt/firefox/distribution
+		cp -f /etc/huayra/firefox/distribution.ini /opt/firefox/distribution/
 		echo "Instalación finalizada"
 	else
 		echo "El directorio temporal de trabajo no fue eliminado para que puedas revisar el problema: $work_dir"
