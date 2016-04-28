@@ -60,7 +60,7 @@ if [ $failed = 0 ]; then
 
 				curl -o "$work_dir/VERIFY.SHA512" "http://ftp.mozilla.org/pub/firefox/releases/$moz_latest/SHA512SUMS"
 				if [ $? = 0 ]; then  
-					grep " linux-$moz_arch/$moz_lang/firefox-" "$work_dir/VERIFY.SHA512" |sed "s/linux-$moz_arch\/$moz_lang\///" > "$work_dir/VERIFY.SHA512.sum"
+					grep " firefox-$moz_latest.$moz_lang.linux-$moz_arch.tar.bz2" "$work_dir/VERIFY.SHA512" | sed "s/firefox-$moz_latest.$moz_lang.linux-$moz_arch.tar.bz2/firefox-$moz_latest.tar.bz2/" > "$work_dir/VERIFY.SHA512.sum"
 
 					#Archivo descargado, comprobar sha512
 					echo "Verificando SHA512"
