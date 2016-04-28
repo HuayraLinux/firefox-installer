@@ -1,3 +1,9 @@
+firefox-installer (1.16) unstable; urgency=medium
+
+  * update a firefox 46.0
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Thu, 28 Apr 2016 12:51:50 -0300
+
 firefox-installer (1.15) unstable; urgency=medium
 
   * soporte de distribution.ini
