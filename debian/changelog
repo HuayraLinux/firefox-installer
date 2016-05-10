@@ -1,3 +1,11 @@
+firefox-installer (1.18) unstable; urgency=medium
+
+  * rollback a la comprobacion del sha512sum debido a bug en el 
+    sitio de release de firefox 
+    https://rail.merail.ca/posts/firefox-460-and-sha512sums.html
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Tue, 10 May 2016 14:27:00 -0300
+
 firefox-installer (1.17) unstable; urgency=medium
 
   * actulizacion archivo sha512sum del sitio de mozilla
