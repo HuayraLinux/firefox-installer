@@ -1,3 +1,9 @@
+firefox-installer (1.19) unstable; urgency=medium
+
+  * update a firefox 50.0.1
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Tue, 29 Nov 2016 15:33:49 -0300
+
 firefox-installer (1.18) unstable; urgency=medium
 
   * rollback a la comprobacion del sha512sum debido a bug en el 
