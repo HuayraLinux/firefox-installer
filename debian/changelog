@@ -1,3 +1,15 @@
+firefox-installer (1.21) unstable; urgency=medium
+
+  * update a firefox 57.0.4
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Thu, 11 Jan 2018 12:43:48 -0300
+
+firefox-installer (1.20) unstable; urgency=medium
+
+  * fix de URL's y bump para version 57
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Thu, 30 Nov 2017 11:00:54 -0300
+
 firefox-installer (1.19) unstable; urgency=medium
 
   * update a firefox 50.0.1
