@@ -1,6 +1,13 @@
+firefox-installer (1.23) unstable; urgency=medium
+
+  * Update a firefox 65.0.1
+  * Corrección de links
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Thu, 14 Feb 2019 11:24:59 -0300
+
 firefox-installer (1.22) unstable; urgency=medium
 
-  * Depdnencia de ca-certificates  
+  * Dependencia de ca-certificates  
 
  -- Fernando Toledo <ragnarok@docksud.com.ar>  Thu, 13 Dec 2018 15:29:24 -0300
 
