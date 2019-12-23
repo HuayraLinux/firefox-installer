@@ -1,0 +1,13 @@
+Template: firefox-installer/remove-install-files
+Type: boolean
+Default: false
+Description: Desea eliminar los archivos de instalación que fueron descargados?
+ Confirme si desea eliminar los archivos de instalación de Firefox
+ al remover este paquete:
+ .
+ Cuando desinstale este paquete (firefox-installer) puede elegir si desea eliminar los archivos
+ de instalacion del mismo que fueron descargados al momento de instalación.
+ .
+ Esto SOLO va a eliminar los archivos de instalación que se encuentran
+ en /opt/firefox y NO se eliminan sus archivos personales de los perfiles
+ generados en el HOME del usuario (~/.mozilla/firefox).

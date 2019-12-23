@@ -2,7 +2,7 @@ Source: firefox-installer
 Section: utils
 Priority: extra
 Maintainer: Fernando Toledo <ragnarok@docksud.com.ar>
-Build-Depends: debhelper (>= 8.0.0)
+Build-Depends: debhelper (>= 8.0.0), devscripts
 Standards-Version: 3.9.6
 Homepage: https://github.com/HuayraLinux/firefox-installer
 Vcs-Git: https://github.com/HuayraLinux/firefox-installer.git
@@ -13,7 +13,7 @@ Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends},
  coreutils (>= 8.23), curl (>= 7.38), sed (>= 4.2), dos2unix (>= 6.0),
  dpkg (>= 1.0), bzip2 (>= 1.0.6), ca-certificates
-Provides: gnome-www-browser, www-browser
+Provides: gnome-www-browser, www-browser, firefox, firefox-esr
 Description: Pequeño script para instalar la última versión de Firefox
  Este script instala la versión más reciente de Mozilla Firefox
  .

@@ -1,10 +1,29 @@
-#!/bin/sh -e
+#!/bin/sh
 
 set -e
+
 
 if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]; then
     update-alternatives --remove x-www-browser /usr/bin/firefox
     update-alternatives --remove gnome-www-browser /usr/bin/firefox
 fi
+
+if [ "$1" = "remove" ]; then
+    # Debconf
+    . /usr/share/debconf/confmodule
+
+    db_version 2.0
+
+    db_get firefox-installer/remove-install-files
+
+    if [ "$RET" = "true" ]; then
+      echo "Eliminando archivos de /opt/firefox"
+      rm -rf /opt/firefox
+    fi
+
+fi
+
+
+exit 0
 
 #DEBHELPER#
