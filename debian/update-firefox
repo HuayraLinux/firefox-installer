@@ -61,9 +61,10 @@ if [ $failed = 0 ]; then
 				curl -o "$work_dir/VERIFY.SHA512" "http://ftp.mozilla.org/pub/firefox/releases/$moz_latest/SHA512SUMS"
 				if [ $? = 0 ]; then  
 					grep " linux-$moz_arch/$moz_lang/firefox-" "$work_dir/VERIFY.SHA512" |sed "s/linux-$moz_arch\/$moz_lang\///" > "$work_dir/VERIFY.SHA512.sum"
-					# BUG en release ff 46.0 # grep " firefox-$moz_latest.$moz_lang.linux-$moz_arch.tar.bz2" "$work_dir/VERIFY.SHA512" | sed "s/firefox-$moz_latest.$moz_lang.linux-$moz_arch.tar.bz2/firefox-$moz_latest.tar.bz2/" > "$work_dir/VERIFY.SHA512.sum"
+                    # FIX b'' en nuevo archivo de sumas de verificacion
+                    sed -i "$work_dir/VERIFY.SHA512.sum" -e "s/b'//" -e "s/'//"
 
-					#Archivo descargado, comprobar sha512
+ 					#Archivo descargado, comprobar sha512
 					echo "Verificando SHA512"
 					old_pwd=`pwd` 
 					cd "$work_dir"

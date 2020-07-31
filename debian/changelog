@@ -1,3 +1,10 @@
+firefox-installer (1.25) unstable; urgency=medium
+
+  * update a Firefox 79
+  * correccion por cambio del formato del archivo sha512sum 
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Fri, 31 Jul 2020 12:32:55 -0300
+
 firefox-installer (1.24) unstable; urgency=medium
 
   * update a Firefox 71
