@@ -4,3 +4,4 @@ debian/firefox.svg 	usr/share/icons/hicolor/scalable/apps/
 debian/huayra.js 	etc/huayra/firefox/
 debian/huayra.cfg 	etc/huayra/firefox/
 debian/distribution.ini	etc/huayra/firefox/
+debian/policies.json	etc/huayra/firefox/
