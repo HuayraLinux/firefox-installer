@@ -1,3 +1,9 @@
+firefox-installer (1.30) unstable; urgency=medium
+
+  * Agrega icon icono sobre grooming.
+
+ -- Matias De lellis <mati86dl@gmail.com>  Tue, 22 Jun 2021 13:01:20 -0300
+
 firefox-installer (1.29) unstable; urgency=medium
 
   * Actualiza para Firefox 89
