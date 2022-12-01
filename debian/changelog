@@ -1,3 +1,9 @@
+firefox-installer (1.33) unstable; urgency=medium
+
+  * Deshablita Firefox-view y pocket.
+
+ -- Matias De lellis <mati86dl@gmail.com>  Thu, 01 Dec 2022 13:08:57 -0300
+
 firefox-installer (1.32) unstable; urgency=medium
 
   * Nuevos marcadores
