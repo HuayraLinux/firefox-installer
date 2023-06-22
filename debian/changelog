@@ -1,3 +1,11 @@
+firefox-installer (1.34) unstable; urgency=medium
+
+  * Actualiación de vesiones de dependencias
+  * Actualiación de standard 4.5.1
+  * Corrección de postint (lintian confmodule)
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Thu, 22 Jun 2023 18:08:49 -0300
+
 firefox-installer (1.33) unstable; urgency=medium
 
   * Deshablita Firefox-view y pocket.
